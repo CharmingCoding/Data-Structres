@@ -2,53 +2,53 @@
 #include<malloc.h>
 typedef int ElementType;
 typedef struct SNode *Stack;
-struct SNode{
+struct SNode{                                    //è¿›è¡Œç»“æ„ä½“è®¾ç½®ï¼Œä¸€å…±æœ‰ä¸¤ä¸ªç©ºæ ¼ï¼Œç¬¬ä¸€ä¸ªæ”¾æ•°æ®Dataï¼Œç¬¬äºŒä¸ªæ”¾æŒ‡å‘ä¸‹ä¸€ä¸ªé“¾è¡¨çš„æŒ‡é’ˆNext
 	ElementType Data;
 	Stack Next;
 };
 
 
-Stack CreateStack();  // ³õÊ¼»¯Á´Õ» 
-int IsEmpty(Stack S);  // ÅĞ¶ÏÁ´Õ»ÊÇ·ñÎª¿Õ 
-void Push(Stack S,ElementType item);  // ÈëÕ» 
-ElementType Pop(Stack S);  // ³öÕ»
+Stack CreateStack();  // åˆå§‹åŒ–é“¾æ ˆ 
+int IsEmpty(Stack S);  // åˆ¤æ–­é“¾æ ˆæ˜¯å¦ä¸ºç©º 
+void Push(Stack S,ElementType item);  // å…¥æ ˆ 
+ElementType Pop(Stack S);  // å‡ºæ ˆ
  
 
-// ³õÊ¼»¯ 
-Stack CreateStack(){
+// åˆå§‹åŒ– 
+Stack CreateStack(){                                     //å…ˆè®¾ç½®ä¸€ä¸ªç©ºæ ˆï¼Œå¯è§†ä½œæ ˆé¦–ï¼Œåç»­çš„æ•°æ®å¯æ·»åŠ åœ¨æ­¤å
 	Stack S;
 	S = (Stack)malloc(sizeof(struct SNode));
 	S->Next = NULL;
 	return S;
 }
 
-// ÅĞ¶ÏÊÇ·ñÎª¿Õ 
+// åˆ¤æ–­æ˜¯å¦ä¸ºç©º 
 int IsEmpty(Stack S){
 	return (S->Next == NULL);
 }
 
-// ÈëÕ»
+// å…¥æ ˆ
 void Push(Stack S,ElementType item){
 	Stack tmp;
 	tmp = (Stack)malloc(sizeof(struct SNode));
 	tmp->Data = item;
-	// Á´Õ»Õ»¶¥ÔªËØÊÇÁ´±íÍ·½áµã£¬ĞÂÈëÕ»µÄÁ´±íÔÚÕ»¶¥ÔªËØºóÃæ 
+	// é“¾æ ˆæ ˆé¡¶å…ƒç´ æ˜¯é“¾è¡¨å¤´ç»“ç‚¹ï¼Œæ–°å…¥æ ˆçš„é“¾è¡¨åœ¨æ ˆé¡¶å…ƒç´ åé¢ 
 	tmp->Next = S->Next;   
 	S->Next = tmp;
 } 
 
-// ³öÕ»
+// å‡ºæ ˆ
 ElementType Pop(Stack S){
 	Stack First;
 	ElementType TopVal;
 	if(IsEmpty(S)){
-		printf("¶ÑÕ»¿Õ");
+		printf("å †æ ˆç©º");
 		return;
 	}else{
-		First = S->Next;   // ³öÕ»µÚÒ»¸öÔªËØÔÚÕ»¶¥ÔªËØºóÃæ 
-		S->Next = First->Next;  //°ÑµÚÒ»¸öÔªËØ´ÓÁ´Õ»É¾³ı 
-		TopVal = First->Data;   // È¡³ö±»É¾³ı½áµãµÄÖµ 
-		free(First);  // ÊÍ·Å¿Õ¼ä 
+		First = S->Next;   // å‡ºæ ˆç¬¬ä¸€ä¸ªå…ƒç´ åœ¨æ ˆé¡¶å…ƒç´ åé¢ 
+		S->Next = First->Next;  //æŠŠç¬¬ä¸€ä¸ªå…ƒç´ ä»é“¾æ ˆåˆ é™¤ 
+		TopVal = First->Data;   // å–å‡ºè¢«åˆ é™¤ç»“ç‚¹çš„å€¼ 
+		free(First);  // é‡Šæ”¾ç©ºé—´ 
 		return TopVal;
 	}
 } 
@@ -56,13 +56,13 @@ ElementType Pop(Stack S){
 int main(){
 	Stack S;
 	S = CreateStack();
-	printf("5ÈëÕ»\n");
+	printf("5å…¥æ ˆ\n");
 	Push(S,5);
-	printf("7ÈëÕ»\n");
+	printf("7å…¥æ ˆ\n");
 	Push(S,7);
-	printf("66ÈëÕ»\n");
+	printf("66å…¥æ ˆ\n");
 	Push(S,66);
-	printf("%d³öÕ»\n",Pop(S));
-	printf("%d³öÕ»\n",Pop(S));
+	printf("%då‡ºæ ˆ\n",Pop(S));
+	printf("%då‡ºæ ˆ\n",Pop(S));
 	return 0;
 } 
